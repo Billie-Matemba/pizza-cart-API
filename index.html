@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="//unpkg.com/alpinejs" defer></script>
+    <script src="https://unpkg.com/axios@1.6.7/dist/axios.min.js"></script>
+    <title>Pizza_cart_api</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="pizza.js"></script>
+</head>
+
+<body x-data="pizzaCart">
+    <h1>PIZZA CART API</h1>
+    <div>
+       
+        <button @click="toggle" x-show="cartId">Order History</button>
+        <div x-show="showOrderHistory">
+        
+            <ul>
+                <template x-for="order in orderHistory" :key="order.id">
+                    <li>
+                        <p>Order ID: <span x-text="order.id"></span></p>
+                        <template x-for="pizza in order.pizzas" :key="pizza.id">
+                    <li><span x-text="pizza.flavour"></span> <span x-text="pizza.size"></span> @ R <span
+                            x-text="pizza.price"></span></li>
+                </template>
+        
+        
+                <p>Total: R <span x-text="order.total"></span></p>
+                <p>Date: <span x-text="order.date"></span></p>
+        
+                </li>
+                </template>
+            </ul>
+        </div>
+        <div>
+            <div>
+                Username: <input type="text" x-model="username">
+                <button @click="login" x-show="!cartId">Login</button>
+                <button @click="logout" x-show="username && cartId">Logout</button>
+            </div>
+            <div x-show="cartId">
+                Cart code: <span x-text="cartId"></span>
+            </div>
+        </div>
+        <div x-show="cartTotal > 0">
+            <h2>Your Cart</h2>
+            <div class="message" x-text="message"></div>
+            <table>
+                <tr>
+                    <th>Flavour</th>
+                    <th>Size</th>
+                    <th>Price</th>
+                    <th>Qty</th>
+                    <th>Total</th>
+                </tr>
+                <template x-for="pizza in cartPizzas">
+                    <tr>
+                        <td x-text="pizza.flavour"></td>
+                        <td x-text="pizza.size"></td>
+                        <td x-text="pizza.price"></td>
+                        <td>
+                            <button @click="addPizzaToCart(pizza.id)">+</button>
+                            x<span x-text="pizza.qty"></span>
+                            <button @click="removePizzaFromCart(pizza.id)">-</button>
+                        </td>
+                        <td x-text="pizza.total"></td>
+
+
+                    </tr>
+                </template>
+
+                <tr>
+                    <td colspan="4">Total</td>
+                    <td>R <span x-text="cartTotal"></span></td>
+                </tr>
+
+                <tr>
+                    <td colspan="3">Pay now</td>
+                    <td>
+                        <input x-model="paymentAmount" type="text">
+                    </td>
+                    <td><button @click="payForCart">Pay</button></td>
+                </tr>
+            </table>
+        </div>
+
+
+        <!-- <div>
+            <h3>Featured Pizzas</h3>
+        
+        <div class="featured-pizzas">
+        
+            <template x-for="pizza in featuredPizzas" :key="pizza.id">
+                <div>
+                    <img src="pizza.png" alt="pizza">
+                    <h4 x-text="pizza.flavour"></h4>
+                    <h5>R <span x-text="pizza.price"></span></h5>
+                    <p x-text="pizza.size"></p>
+                    <button class="btn" @click="addPizzaToCart(pizza.id)">Buy</button>
+                </div>
+            </template>
+        </div>
+        </div> -->
+
+
+        <h2 x-show="username && cartId" >Pizzas</h2>
+        <div class="pizza-container" x-show="username && cartId">
+            
+             <template x-for="pizza in pizzas">
+                <div class="pizza"><img src="pizza.png" width="100">
+                    <h5 x-text="pizza.flavour"></h5>
+                    <span x-text="pizza.size"></span><strong>@</strong>                    
+                    R <span x-text="pizza.price"></span>
+                    
+                    <div>
+                        <button @click="addPizzaToCart(pizza.id)"> Add to cart</button>
+                    </div>
+                </div>
+
+            </template>
+        </div>
+    </div>
+</body>
+
+</html>
+
+
+
