@@ -15,7 +15,7 @@
     <h1>PIZZA CART API</h1>
     <div>
        
-        <button @click="toggle" x-show="cartId">Order History</button>
+        <button @click="toggle" x-show="cartId" x-cloak>Order History</button>
         <div x-show="showOrderHistory">
         
             <ul>
@@ -39,13 +39,13 @@
             <div>
                 Username: <input type="text" x-model="username">
                 <button @click="login" x-show="!cartId">Login</button>
-                <button @click="logout" x-show="username && cartId">Logout</button>
+                <button @click="logout" x-show="username && cartId" x-cloak>Logout</button>
             </div>
-            <div x-show="cartId">
+            <div x-show="cartId" x-cloak>
                 Cart code: <span x-text="cartId"></span>
             </div>
         </div>
-        <div x-show="cartTotal > 0">
+        <div x-show="cartTotal > 0" x-cloak>
             <h2>Your Cart</h2>
             <div class="message" x-text="message"></div>
             <table>
@@ -106,7 +106,7 @@
         </div> -->
 
 
-        <h2 x-show="username && cartId" >Pizzas</h2>
+        <h2 x-show="username && cartId" x-cloak >Pizzas</h2>
         <div class="pizza-container" x-show="username && cartId">
             
              <template x-for="pizza in pizzas">
