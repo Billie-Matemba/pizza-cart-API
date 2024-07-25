@@ -19,6 +19,7 @@ body{
 table {
     border-collapse: collapse; 
     border: 1px  solid #B8C0FF;
+    width: 70%;
 }
 table th, table td {
     border: 1px  solid #B8C0FF; 
