@@ -19,25 +19,25 @@ document.addEventListener("alpine:init", () => {
                 }
             },
 
-            // featuredPizzas: [],
+            featuredPizzas: [],
 
 
-            // getFeaturedPizzas() {
-            //     const featuredPizzasURL = `https://pizza-api.projectcodex.net/api/pizzas/featured?username=${this.username}`;
-            //     axios.get(featuredPizzasURL).then(response => {
-            //         this.featuredPizzas = response.data.pizzas || [];
-            //         console.log(response.data.pizzas);
-            //     });
-            // },
+            getFeaturedPizzas() {
+                const featuredPizzasURL = `https://pizza-api.projectcodex.net/api/pizzas/featured?username=${this.username}`;
+                axios.get(featuredPizzasURL).then(response => {
+                    this.featuredPizzas = response.data.pizzas || [];
+                    console.log(response.data.pizzas);
+                });
+            },
       
-            // setFeaturedPizza(pizzaId) {
-            //     return axios.post('https://pizza-api.projectcodex.net/api/pizzas/featured', {
-            //         username: this.username,
-            //         pizza_id: pizzaId,
-            //     }).then(() => {
-            //         this.getFeaturedPizzas();
-            //     });
-            // },
+            setFeaturedPizza(pizzaId) {
+                return axios.post('https://pizza-api.projectcodex.net/api/pizzas/featured', {
+                    username: this.username,
+                    pizza_id: pizzaId,
+                }).then(() => {
+                    this.getFeaturedPizzas();
+                });
+            },
 
 
             saveCartHistory() {

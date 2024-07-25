@@ -88,22 +88,26 @@
         </div>
 
 
-        <!-- <div>
-            <h3>Featured Pizzas</h3>
+        <div x-show="cartId">
+            <!-- <h2>Featured Pizzas</h2> -->
+            <!-- <button @click="getFeaturedPizzas">Load Featured Pizzas</button> -->
         
-        <div class="featured-pizzas">
+            <div class="pizza-container">
         
-            <template x-for="pizza in featuredPizzas" :key="pizza.id">
-                <div>
-                    <img src="pizza.png" alt="pizza">
-                    <h4 x-text="pizza.flavour"></h4>
-                    <h5>R <span x-text="pizza.price"></span></h5>
-                    <p x-text="pizza.size"></p>
-                    <button class="btn" @click="addPizzaToCart(pizza.id)">Buy</button>
-                </div>
-            </template>
+                <template x-for="pizza in featuredPizzas" :key="pizza.id">
+                    <div class="pizza">
+                        <li>
+                            <img src="pizza.png" alt="pizza">
+                            <h4 x-text="pizza.flavour"></h4>
+                            <h5>R <span x-text="pizza.price"></span></h5>
+                            <p x-text="pizza.size"></p>
+                            <button class="btn" @click="addPizzaToCart(pizza.id)">Buy</button>
+                        </li>
+                    </div>
+                </template>
+        
+            </div>
         </div>
-        </div> -->
 
 
         <h2 x-show="username && cartId" x-cloak >Pizzas</h2>
@@ -114,10 +118,14 @@
                     <h5 x-text="pizza.flavour"></h5>
                     <span x-text="pizza.size"></span><strong>@</strong>                    
                     R <span x-text="pizza.price"></span>
-                    
+                    <div class="butt">
                     <div>
                         <button @click="addPizzaToCart(pizza.id)"> Add to cart</button>
                     </div>
+                    <div>
+                        <button @click="setFeaturedPizza(pizza.id)">Set as Featured</button>
+                    </div>
+                </div>
                 </div>
 
             </template>
