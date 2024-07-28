@@ -46,7 +46,8 @@ document.addEventListener("alpine:init", () => {
                     id: this.cartId,
                     pizzas: this.cartPizzas,
                     total: this.cartTotal,
-                    date: new Date().toISOString()
+                    date: new Date().toISOString(),
+                    username: this.username
                 };
                 history.push(currentCart);
                 localStorage.setItem('orderHistory', JSON.stringify(history));
@@ -54,7 +55,7 @@ document.addEventListener("alpine:init", () => {
 
             history() {
                 const history = JSON.parse(localStorage.getItem('orderHistory')) || [];
-                this.orderHistory = history;
+                this.orderHistory = history.filter(order => order.username === this.username);
             },
            
             login() {
@@ -182,7 +183,11 @@ document.addEventListener("alpine:init", () => {
                         this.message = result.data.message;
                         setTimeout(() => this.message = '', 3000);
                     } else {
-                        this.message = 'Payment received!';
+                        if (this.paymentAmount >= this.cartTotal) {
+                            const change = this.paymentAmount - this.cartTotal;
+                            this.message = `Payment received! Your change is R${change.toFixed(2)}.`;
+        
+
                         this.saveCartHistory();
 
                         setTimeout(() => {
@@ -195,6 +200,7 @@ document.addEventListener("alpine:init", () => {
                             this.createCart();
                         },3000);
                     }
+                }
                     
                 });
             }
